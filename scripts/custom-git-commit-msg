@@ -15,6 +15,20 @@ our %changes    = (
 our $begin_line =   qr/to be committed/;
 our $end_line   =   qr/not staged for commit/;
 our $original   =   '';
+our %labels = (
+    'added'     =>  <<EOF,
+== Nuevos archivos == 
+
+EOF
+    'modified'  =>  <<EOF,
+== Modificados ==
+
+EOF
+    'deleted'   =>  <<EOF,
+== Borrados == 
+
+EOF
+);
 
 #   Main loop: filter
 our $state = undef;
@@ -48,22 +62,37 @@ while (my $line = <STDIN>) {
     }
 }
 
-#   sort the changes and build the output
-our %labels = (
-    'added'     =>  <<EOF,
-== Nuevos archivos == 
+#  build the final commit message
+_dump_formatted_changes( \*STDOUT, \%changes );
 
-EOF
-    'modified'  =>  <<EOF,
-== Modificados ==
+#   with the original input
+print STDOUT $original;
 
-EOF
-    'deleted'   =>  <<EOF,
-== Borrados == 
+1;
 
-EOF
-);
+sub _dump_formatted_changes {
+    my  $output     =   shift;
+    my  $changes    =   shift;
 
-    
+    foreach my $changetype (qw(added modified deleted)) {
+        if (scalar(@{$changes->{$changetype}}) > 0) {
+            print $output $labels{$changetype};
+        
+            _dump_file_list( $output, $changes->{$changetype} );
+        }
+    }
 
+    return;
+}    
+
+sub _dump_file_list {
+    my  $output     =   shift;
+    my  $file_list  =   shift;
+
+    foreach my $file (@{ $file_list }) {
+        printf $output "%s:\n\n", $file;
+    }
+
+    return;
+}
 
