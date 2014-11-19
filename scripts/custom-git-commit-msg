@@ -17,10 +17,52 @@ our $end_line   =   qr/not staged for commit/;
 our $original   =   '';
 
 #   Main loop: filter
+our $state = undef;
 while (my $line = <STDIN>) {
+    # backup original line and discard not commented lines
     $original .= $line;
-    
+    next if $line !~ m{^#};
+
+    # Checking state
+    if (not defined $state) {
+        if ($line =~ m{$begin_line}) {
+            $state = 'search';
+        }
+        elsif ($line =~ m{$end_line}) {
+            $state = 'discard';
+        }
+    }
+    elsif ($state eq 'search' and line =~ m{$end_line}) {
+        $state = 'discard';
+    }
+
+    if ($line =~ m{#\s+new file:\s+(.+)$}) {
+        push(@{$changes{added}}, $1);
+    }
+    elsif ($line =~ m{#\s+modified:\s+(.+)$}) {
+        push(@{$changes{modified}}, $1);
+    }
+    elsif ($line =~ m{#\s+deleted:\s+(.+)$}) {
+        push(@{$changes{deleted}}, $1);
+    }
 }
 
+#   sort the changes and build the output
+our %labels = (
+    'added'     =>  <<EOF,
+== Nuevos archivos == 
+
+EOF
+    'modified'  =>  <<EOF,
+== Modificados ==
+
+EOF
+    'deleted'   =>  <<EOF,
+== Borrados == 
+
+EOF
+);
+
     
+
 
