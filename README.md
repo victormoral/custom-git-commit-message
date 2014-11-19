@@ -3,6 +3,8 @@ custom-git-commit-message
 
 Scripts for customize the git commit message. 
 
+Note: The filter writes  spanish comments on the commit message. 
+
 ## Instalation 
 
 Install the script as executable on some place into your usual place for custom programs. 
