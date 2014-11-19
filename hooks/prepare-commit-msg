@@ -23,9 +23,9 @@ FILTER_GIT_COMMIT=$(which custom-git-commit-msg)
 #   Auxiliary files 
 TEMPFILE=$(mktemp)
 
-case "$COMMIT_MSG" in
+case "$MSG_SOURCE" in
 commit)
-    $(FILTER_GIT_COMMIT) < $COMMIT_MSG > $TEMPFILE
+    $FILTER_GIT_COMMIT < $COMMIT_MSG > $TEMPFILE
     if [ $? -eq 0 ]; then 
         mv $TEMPFILE $COMMIT_MSG
     else
