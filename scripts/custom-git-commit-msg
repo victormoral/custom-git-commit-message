@@ -1,0 +1,26 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use utf8;
+
+#   Variables
+our $VERSION    =  0.1;
+
+our %changes    = (
+    'added'     =>  [],
+    'modified'  =>  [],
+    'deleted'   =>  []
+);
+our $begin_line =   qr/to be commited/;
+our $end_line   =   qr/not staged for commit/;
+our $original   =   '';
+
+#   Main loop: filter
+while (my $line = <STDIN>) {
+    $original .= $line;
+    
+}
+
+    
+
