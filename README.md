@@ -15,22 +15,22 @@ Copy the hook into the git hooks  directory of your repository and change the pe
 
 Make changes on your repository. Add, modify and delete files and commit them. The message shall be as this:
 
-== Nuevos archivos == 
+    == Nuevos archivos == 
 
-newfile:
-    - 
+    newfile:
+        - 
 
-anothernew\_file:
-    -
+    anothernew_file:
+        -
 
-== Modificados == 
+    == Modificados == 
 
-updated\_file:
-    -
+    updated_file:
+        -
 
-== Borrados == 
+    == Borrados == 
 
-deleted\_file:
+    deleted_file:
 
 And following the original commit message.
 
