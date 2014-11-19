@@ -1,36 +1,37 @@
 #!/bin/sh
-#
-# An example hook script to prepare the commit log message.
-# Called by "git commit" with the name of the file that has the
-# commit message, followed by the description of the commit
-# message's source.  The hook's purpose is to edit the commit
-# message file.  If the hook fails with a non-zero status,
-# the commit is aborted.
-#
-# To enable this hook, rename this file to "prepare-commit-msg".
 
-# This hook includes three examples.  The first comments out the
-# "Conflicts:" part of a merge commit.
+#   
+#   Este script puede ser invocado con uno a tres parámetros:
+#   $1  Archivo con el texto del registro (commit message):
+#   $2  Fuente del texto del registro:
+#       - message: usados los parámetros -m o -F
+#       - template: empleado parámetro -t o opción "commit.template"
+#       - merge: si es una operación de mezclado o el archivo .git/MERGE_MSG
+#                existe
+#       - squash: si existe un archivo .git/SQUASH_MSG
+#       - commit: en otro caso
 #
-# The second includes the output of "git diff --name-status -r"
-# into the message, just before the "git status" output.  It is
-# commented because it doesn't cope with --amend or with squashed
-# commits.
-#
-# The third example adds a Signed-off-by line to the message, that can
-# still be edited.  This is rarely a good idea.
 
-case "$2,$3" in
-  merge,)
-    /usr/bin/perl -i.bak -ne 's/^/# /, s/^# #/#/ if /^Conflicts/ .. /#/; print' "$1" ;;
+#   Taking parameters
+COMMIT_MSG=$1
+MSG_SOURCE=$2
+OTHER=$3
 
-# ,|template,)
-#   /usr/bin/perl -i.bak -pe '
-#      print "\n" . `git diff --cached --name-status -r`
-#	 if /^#/ && $first++ == 0' "$1" ;;
+#   External scripts 
+FILTER_GIT_COMMIT=$(which custom-git-commit-msg)
 
-  *) ;;
+#   Auxiliary files 
+TEMPFILE=$(mktemp)
+
+case "$COMMIT_MSG" in
+commit)
+    $(FILTER_GIT_COMMIT) < $COMMIT_MSG > $TEMPFILE
+    if [ $? -eq 0 ]; then 
+        mv $TEMPFILE $COMMIT_MSG
+    else
+        exit 1
+    fi   
+    ;;
 esac
 
-# SOB=$(git var GIT_AUTHOR_IDENT | sed -n 's/^\(.*>\).*$/Signed-off-by: \1/p')
-# grep -qs "^$SOB" "$1" || echo "$SOB" >> "$1"
+exit 0
