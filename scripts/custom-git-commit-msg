@@ -5,14 +5,14 @@ use warnings;
 use utf8;
 
 #   Variables
-our $VERSION    =  0.1;
+our $VERSION    =  0.2;
 
 our %changes    = (
     'added'     =>  [],
     'modified'  =>  [],
     'deleted'   =>  []
 );
-our $begin_line =   qr/to be commited/;
+our $begin_line =   qr/to be committed/;
 our $end_line   =   qr/not staged for commit/;
 our $original   =   '';
 
@@ -31,8 +31,9 @@ while (my $line = <STDIN>) {
         elsif ($line =~ m{$end_line}) {
             $state = 'discard';
         }
+        next;
     }
-    elsif ($state eq 'search' and line =~ m{$end_line}) {
+    elsif ($state eq 'search' and $line =~ m{$end_line}) {
         $state = 'discard';
     }
 
