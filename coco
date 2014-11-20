@@ -1,0 +1,12 @@
+total 44
+drwxr-xr-x  6 victor victor 4096 nov 19 16:09 .
+drwxr-xr-x 25 victor victor 4096 nov 19 08:38 ..
+-rw-r--r--  1 victor victor    0 nov 19 16:11 coco
+drwxr-xr-x  8 victor victor 4096 nov 19 16:11 .git
+-rw-r--r--  1 victor victor  217 nov 19 15:45 .gitignore
+drwxr-xr-x  2 victor victor 4096 nov 19 15:45 hooks
+-rw-r--r--  1 victor victor 7633 nov 19 07:31 LICENSE
+-rw-r--r--  1 victor victor  500 nov 19 15:45 Makefile
+-rw-r--r--  1 victor victor  822 nov 19 08:25 README.md
+drwxr-xr-x  2 victor victor 4096 nov 19 08:43 samples
+drwxr-xr-x  2 victor victor 4096 nov 19 16:08 scripts
