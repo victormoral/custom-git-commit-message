@@ -1,11 +1,17 @@
 #!/usr/bin/perl
 
-use strict;
-use warnings;
+use Modern::Perl;
 use utf8;
 
+# For setlocale.
+use POSIX qw (setlocale);
+use Locale::Messages qw (LC_MESSAGES);
+
+# Our message's catalog
+use Locale::TextDomain qw(net.taquiones.custom-git-commit-msg);
+
 #   Variables
-our $VERSION    =  0.2;
+our $VERSION    =  0.3;
 
 our %changes    = (
     'added'     =>  [],
@@ -15,19 +21,10 @@ our %changes    = (
 our $begin_line =   qr/to be committed/;
 our $end_line   =   qr/not staged for commit/;
 our $original   =   '';
-our %labels = (
-    'added'     =>  <<EOF,
-== Nuevos archivos == 
-
-EOF
-    'modified'  =>  <<EOF,
-== Modificados ==
-
-EOF
-    'deleted'   =>  <<EOF,
-== Borrados == 
-
-EOF
+our %labels =   (
+    'added'     =>  N__"Nuevos archivos",
+    'modified'  =>  N__"Modificados",
+    'deleted'   =>  N__"Borrados",
 );
 
 #   Main loop: filter
@@ -73,10 +70,14 @@ print STDOUT $original;
 sub _dump_formatted_changes {
     my  $output     =   shift;
     my  $changes    =   shift;
+    my  $change_header = <<EOF;
+== %s ==
 
+EOF
     foreach my $changetype (qw(added modified deleted)) {
         if (scalar(@{$changes->{$changetype}}) > 0) {
-            print $output $labels{$changetype};
+            my $header = sprintf($change_header,$labels{$changetype});
+            print $output $header;
         
             _dump_file_list( $output, $changes->{$changetype} );
         }

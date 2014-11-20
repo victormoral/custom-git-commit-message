@@ -2,7 +2,8 @@
 VERSION=0.1
 
 #	Files
-SCRIPTS=scripts/custom-git-commit-msg
+FILTER=scripts/custom-git-commit-msg
+SCRIPTS=$(FILTER)
 HOOK=hooks/prepare-commit-msg
 SAMPLE=samples/commit-msg.4
 SAMPLE_TEMP=samples/test.msg
@@ -11,6 +12,7 @@ SAMPLE_TEMP=samples/test.msg
 BINDIR=$(DESTDIR)/usr/bin
 
 #	Tools and parameters
+PERL_DEBUG=perl -Ilib -d:ptkdb
 INSTALL=sudo install
 TEST_SCRIPT=sh -x 
 
@@ -29,4 +31,6 @@ install: install-scripts
 install-scripts:
 	$(INSTALL) -m 0555 $(SCRIPTS) $(BINDIR)
 
+debug:
+	$(PERL_DEBUG) $(FILTER) < $(SAMPLE)
 
