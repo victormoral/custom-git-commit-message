@@ -11,7 +11,7 @@ use Locale::Messages qw (LC_MESSAGES);
 use Locale::TextDomain qw(net.taquiones.custom-git-commit-msg);
 
 #   Variables
-our $VERSION    =  0.3;
+our $VERSION    =  0.4;
 
 our %changes    = (
     'added'     =>  [],
@@ -22,9 +22,9 @@ our $begin_line =   qr/to be committed/;
 our $end_line   =   qr/not staged for commit/;
 our $original   =   '';
 our %labels =   (
-    'added'     =>  N__"Nuevos archivos",
-    'modified'  =>  N__"Modificados",
-    'deleted'   =>  N__"Borrados",
+    'added'     =>  N__"Files added",
+    'modified'  =>  N__"Updated files",
+    'deleted'   =>  N__"Deleted files",
 );
 
 #   Main loop: filter

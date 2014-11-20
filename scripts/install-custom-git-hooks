@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#   Variables
+VERSION=0.1
+TEXTDOMAIN=net.taquiones.custom-git-hooks
+
+#   Places
+CUSTOM_HOOKS_DIR=${1:-/usr/share/custom-git-hooks}
+
+#   Functions
+_log() {
+    echo $(gettext -n "$*") >&2
+}
+
+_die() {
+    _log $0: $*
+    exit 1
+}
+
+#   Check the current directory 
+if [ ! -e ".git/hooks" ]; then
+    _die "This isn't a git repository"
+fi 
+
+#   Copy the hooks
+for h in prepare-commit-msg
+do
+    HOOK="${CUSTOM_HOOKS_DIR}/${h}"
+    if [ -e $HOOK ]; then 
+        cp $HOOK .git/hooks || _die "Failed copy of ${h}"
+        chmod u+x ".git/hooks/${h}" || die "Failed chmod of ${h}"
+        _log "Installed hook ${h}"
+    fi
+done
+
+exit 0
+
