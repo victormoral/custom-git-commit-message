@@ -3,7 +3,9 @@ custom-git-commit-message
 
 Scripts for customize the git commit message. 
 
-Note: The filter writes  spanish comments on the commit message. 
+As a side effect of modify the commit message, it's difficult cancel the commit process. Git thinks that the message has been edited because its contents is different. 
+
+If you want cancel you must delete all lines before the first comment line. 
 
 ## Instalation 
 
