@@ -1,0 +1,31 @@
+# Spanish translation for custom-git-commit-message package
+# Copyright (C) YEAR Víctor Moral
+# This file is distributed under the same license as the
+# custom-git-commit-message package.
+# Victor Moral <victor@taquiones.net>, 2014
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: custom-git-commit-message 0.4\n"
+"Report-Msgid-Bugs-To: Victor Moral <victor@taquiones.net>\n"
+"POT-Creation-Date: 2014-11-20 10:06+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Victor Moral <victor@taquiones.net>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../scripts/custom-git-commit-msg:25
+msgid "Files added"
+msgstr "Nuevos archivos"
+
+#: ../scripts/custom-git-commit-msg:26
+msgid "Updated files"
+msgstr "Modificados"
+
+#: ../scripts/custom-git-commit-msg:27
+msgid "Deleted files"
+msgstr "Borrados"
