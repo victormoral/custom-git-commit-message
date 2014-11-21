@@ -5,7 +5,7 @@
 LINGUAS =   es
 
 # Textdomain for our package.
-TEXTDOMAIN = net.taquiones.custom-git-commig-msg
+TEXTDOMAIN = net.taquiones.custom-git-commit-msg
 
 # Initial copyright holder added to pot and po files.
 COPYRIGHT_HOLDER = Víctor Moral
