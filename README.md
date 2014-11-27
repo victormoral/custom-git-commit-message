@@ -7,6 +7,19 @@ As a side effect of modify the commit message, it's difficult cancel the commit 
 
 If you want cancel you must delete all lines before the first comment line. 
 
+## Dependencies
+
+This package depends on the following Perl modules:
+
+* Modern::Perl
+* Locale::TextDomain
+* Locale::Messages
+
+In Debian these modules are in the packages:
+
+* libmodern-perl-perl
+* libintl-perl
+
 ## Instalation 
 
 Install the script as executable on some place into your usual place for custom programs. 
